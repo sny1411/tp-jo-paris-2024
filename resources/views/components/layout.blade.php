@@ -13,6 +13,20 @@
     <x-header></x-header>
 </menu>
 <main>
+    @if ($errors->any())
+        <x-message-info titre="Information" :message="session('msg')">
+            <div class="errors">
+                <h3 class="titre-erreurs">Liste des erreurs</h3>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </x-message-info>
+    @elseif(session('msg'))
+        <x-information :type="session('type')" :message="session('msg')"></x-information>
+    @endif
     {{$slot}}
 </main>
 <footer>

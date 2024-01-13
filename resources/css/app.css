@@ -102,3 +102,109 @@ footer {
     max-width: 100%;
     height: auto;
 }
+
+.errors {
+    width: 600px;
+    margin: 60px auto;
+    border: #d6336c 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 600px;
+}
+
+.succes {
+    width: 600px;
+    margin: 60px auto;
+    border: #5ed633 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 600px;
+}
+
+.msg-info {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    justify-content: space-around;
+}
+
+.msg-info.primary {
+    background-color: #c0eb75;
+    color: #66a80f;
+}
+
+.msg-info.warning {
+    background-color: #ffe066;
+    color: #f08c00;
+}
+
+.msg-info.error {
+    background-color: #ffa8a8;
+    color: #e03131;
+}
+
+.msg-icon {
+    width: 24px;
+    padding: 5px;
+}
+
+.msg {
+    flex: 1 0 140px;
+    max-width: 220px;
+}
+
+.msg-info .msg-icon {
+    display: flex;
+    align-items: center;
+    width: 24px;
+    padding: 5px;
+}
+
+
+.container.show {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.container.show > div {
+    margin-bottom: 10px;
+}
+
+.container.show form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.container.show button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.container.show button:hover {
+    background-color: #0056b3;
+}
+
+.container.show a {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.container.show a:hover {
+    background-color: #218838;
+}
