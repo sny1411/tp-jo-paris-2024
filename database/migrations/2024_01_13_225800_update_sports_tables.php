@@ -14,6 +14,9 @@ return new class extends Migration
     {
         Schema::table('sports', function (Blueprint $table) {
             $table->string('url_media')->default('images/no-image.svg');
+            $table->foreignIdFor(User::class)->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

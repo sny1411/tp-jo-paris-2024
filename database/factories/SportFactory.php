@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Sport;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,8 @@ class SportFactory extends Factory
             'nb_disciplines' => $this->faker->randomDigit(),
             'nb_epreuves' => $this->faker->randomDigit(),
             'date_debut' => $this->faker->dateTimeInInterval,
-            'date_fin' => $this->faker->dateTimeInInterval
+            'date_fin' => $this->faker->dateTimeInInterval,
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }

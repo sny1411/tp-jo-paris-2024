@@ -15,4 +15,18 @@ class Sport extends Model
         'date_debut' => 'datetime',
         'date_fin' => 'datetime'
     ];
+
+    protected $fillable = [
+        'nom',
+        'description',
+        'annee_ajout',
+        'nb_disciplines',
+        'nb_epreuves',
+        'date_debut',
+        'date_fin'
+    ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
