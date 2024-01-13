@@ -1,5 +1,7 @@
-<button><a href="{{route('accueil')}}">🏛 Accueil</a></button>
-<button><a href="{{route('apropos')}}">ℹ️ A Propos</a></button>
-<button><a href="{{route('contact')}}">📞 Contacts</a></button>
-<button><a href="{{route('sports.index')}}">📜 Sports</a></button>
-<button><a href="">🔒 Connexion </a></button>
+<a href="{{route('accueil')}}"><button>🏛 Accueil</button></a>
+<a href="{{route('apropos')}}"><button>ℹ️ A Propos</button></a>
+<a href="{{route('contact')}}"><button>📞 Contacts</button></a>
+<a href="{{route('sports.index')}}"><button>📜 Sports</button></a>
+<div class="menu toRight">
+    <a href=""><button>🔒 Connexion</button></a>
+</div>
