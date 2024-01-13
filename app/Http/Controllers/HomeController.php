@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function accueil()
     {
-        return view('accueil', ['titre' => 'Accueil']);
+        return view('accueil', ['titre' => 'Accueil', 'message'=>"le ". date("d/m/y")]);
     }
 
     public function contact()
