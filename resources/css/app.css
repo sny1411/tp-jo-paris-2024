@@ -208,3 +208,104 @@ footer {
 .container.show a:hover {
     background-color: #218838;
 }
+
+.sport.filtrage {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.sport.filtrage h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.sport.filtrage form {
+    display: flex;
+    align-items: center;
+}
+
+.sport.filtrage label {
+    margin-right: 10px;
+}
+
+.sport.filtrage select {
+    padding: 8px;
+}
+
+.sport.filtrage input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sport.filtrage input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e5f2ff;
+}
+
+.sport-but {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sport-but a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.2rem;
+    display: block;
+}
+
+.sport-but a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .sport.filtrage form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sport.filtrage label {
+        margin-bottom: 10px;
+    }
+
+    .sport.filtrage select {
+        width: 100%;
+    }
+}
