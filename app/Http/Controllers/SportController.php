@@ -5,13 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\Sport;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class SportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sports = Sport::all();
-        return view('sport.index', ['sports' => $sports, 'titre' => 'Liste des sports']);
+        $cat = $request->input('cat', null);
+        $value = $request->cookie('cat', null);
+        if (!isset($cat)) {
+            if (!isset($value)) {
+                $sports = Sport::all();
+                $cat = 'All';
+                Cookie::expire('cat');
+            } else {
+                $sports = Sport::where('nb_epreuves', $value)->get();
+                $cat = $value;
+                Cookie::queue('cat', $cat, 10);            }
+        } else {
+            if ($cat == 'All') {
+                $sports = Sport::all();
+                Cookie::expire('cat');
+            } else {
+                $sports = Sport::where('nb_epreuves', $cat)->get();
+                Cookie::queue('cat', $cat, 10);
+            }
+        }
+
+        $difNbEpreuves = Sport::distinct('nb_epreuves')->pluck('nb_epreuves');
+
+        return view('sport.index', ['sports' => $sports,
+            'titre' => 'Liste des sports',
+            'difNbEpreuves' => $difNbEpreuves,
+            'cat' => $cat]);
     }
 
     public function create() {

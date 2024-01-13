@@ -1,5 +1,20 @@
 <x-layout :titre="$titre">
     @if(!empty($sports))
+        <div class="sport filtrage">
+        <h4>Filtrage par nombre d'épreuves</h4>
+        <form action="{{route('sports.index')}}" method="get">
+            <label>
+                <select name="cat">
+                    <option value="All" @if($cat == 'All') selected @endif>-- Toutes catégories --</option>
+                    @foreach($difNbEpreuves as $difNbEpreuve)
+                        <option value="{{$difNbEpreuve}}" @if($cat == $difNbEpreuve)
+                            selected @endif>{{$difNbEpreuve}}</option>
+                    @endforeach
+                </select>
+            </label>
+            <input type="submit" value="OK">
+        </form>
+        </div>
         <table>
             <caption>Liste des sports</caption>
             <thead>
