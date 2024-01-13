@@ -20,3 +20,4 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/apropos', [HomeController::class, 'apropos'])->name('apropos');
 
 Route::resource('sports', SportController::class);
+Route::post('/sports/{id}/upload', [SportController::class, 'upload'])->name('sports.upload');

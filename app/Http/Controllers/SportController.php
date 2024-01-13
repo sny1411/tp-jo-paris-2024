@@ -6,6 +6,7 @@ use App\Models\Sport;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 class SportController extends Controller
 {
@@ -74,7 +75,7 @@ class SportController extends Controller
 
         return redirect()->route('sports.index', ['titre' => "Liste des sports"])
             ->with('type', 'primary')
-            ->with('msg', 'Tache ajoutée avec succès');
+            ->with('msg', 'Sport ajoutée avec succès');
     }
 
     public function show(Request $request, $id) {
@@ -129,9 +130,12 @@ class SportController extends Controller
     }
 
     public function destroy(Request $request, string $id) {
-        $tache = Sport::find($id);
+        $sport = Sport::find($id);
         if ($request->delete == 'valide') {
-            $tache->delete();
+            if (isset($sport->url_media) && $sport->url_media != "images/no-image.svg") {
+                Storage::delete($sport->url_media);
+            }
+            $sport->delete();
             return redirect()->route('sports.index')
                 ->with('type', 'primary')
                 ->with('msg', 'Sport supprimée avec succès');
@@ -140,5 +144,37 @@ class SportController extends Controller
                 ->with('type', 'warning')
                 ->with('msg', 'Suppression sport annulée');
         }
+    }
+
+    public function upload(Request $request, $id) {
+        $sport = Sport::findOrFail($id);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $file = $request->file('image');
+        } else {
+            if (!$request->hasFile('image')) {
+                $msg = "Aucun fichier téléchargé";
+            }
+            else {
+                $msg = "fichier mal téléchargé";
+            }
+            return redirect()->route('sports.show', [$sport->id])
+                ->with('type', 'error')
+                ->with('msg', 'Sport non modifiée (' . $msg . ')');
+        }
+        $nom = 'image';
+        $now = time();
+        $nom = sprintf("%s_%d.%s", $nom, $now, $file->extension());
+
+        $file->storeAs('images/sports', $nom);
+        if (isset($sport->url_media) && $sport->url_media != "images/no-image.svg") {
+            Storage::delete($sport->url_media);
+        }
+        $sport->url_media = 'images/sports/' . $nom;
+        $sport->save();
+
+        return redirect()->route('sports.show', [$sport->id])
+            ->with('type', 'primary')
+            ->with('msg', 'Image du sport modifiée avec succès');
     }
 }

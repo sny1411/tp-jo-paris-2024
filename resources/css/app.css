@@ -309,3 +309,10 @@ tbody tr:hover {
         width: 100%;
     }
 }
+
+.container.show .image {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 100%;
+    height: auto;
+}
