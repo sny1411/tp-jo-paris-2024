@@ -2,6 +2,7 @@
 <a href="{{route('apropos')}}"><button>ℹ️ A Propos</button></a>
 <a href="{{route('contact')}}"><button>📞 Contacts</button></a>
 <a href="{{route('sports.index')}}"><button>📜 Sports</button></a>
+<a href="{{route('sports.index')}}"><button>🏃 Athlètes</button></a>
 @auth
     @can('create', \App\Models\Sport::class)
         <a href="{{route('sports.create')}}"><button>➕ Ajouter un sport</button></a>
