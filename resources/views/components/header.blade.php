@@ -3,7 +3,9 @@
 <a href="{{route('contact')}}"><button>📞 Contacts</button></a>
 <a href="{{route('sports.index')}}"><button>📜 Sports</button></a>
 @auth
-<a href="{{route('sports.create')}}"><button>➕ Ajouter un sport</button></a>
+    @can('create', \App\Models\Sport::class)
+        <a href="{{route('sports.create')}}"><button>➕ Ajouter un sport</button></a>
+    @endcan
 @endauth
 <div class="menu toRight">
     @auth

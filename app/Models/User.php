@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function sports() {
         return $this->hasMany(Sport::class);
     }
+
+    public function isAdmin() {
+        return $this->admin;
+    }
 }

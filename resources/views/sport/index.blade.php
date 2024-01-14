@@ -34,15 +34,21 @@
                     <td>{{ $sport->nb_epreuves }}</td>
                     <td>{{ $sport->date_debut->format('d-m-Y') }}</td>
                     <td>{{ $sport->date_fin->format('d-m-Y') }}</td>
+                    @can('view', $sport)
                     <td><button class="sport-but">
                             <a href="{{route('sports.show', ['sport'=>$sport->id, 'action' => 'show'])}}">🧾</a>
                         </button></td>
+                    @endcan
+                    @can('update', $sport)
                     <td><button class="sport-but">
                             <a href="{{route('sports.edit', ['sport'=>$sport->id])}}">📝</a>
                         </button></td>
+                    @endcan
+                    @can('delete', $sport)
                     <td><button class="sport-but">
                             <a href="{{route('sports.show', ['sport'=>$sport->id, 'action' => 'delete'])}}">❌</a>
                         </button></td>
+                    @endcan
                 </tr>
             @endforeach
             </tbody>
