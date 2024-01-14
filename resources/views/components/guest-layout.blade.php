@@ -34,9 +34,9 @@
             </div>
         </nav>
     </div>
-        @if($errors->isNotEmpty() )
-            <x-information type="error" :message="$errors->get('msg')[0]"></x-information>
-        @endif
+    @if($errors->isNotEmpty() )
+        <x-information type="error" message="Identifiants faux"></x-information>
+    @endif
     <div>
         {{ $slot }}
     </div>
