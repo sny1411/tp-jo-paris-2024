@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function sports() {
+        return $this->hasMany(Sport::class);
+    }
+
+    public function isAdmin() {
+        return $this->admin;
+    }
 }

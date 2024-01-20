@@ -42,10 +42,24 @@ class SportController extends Controller
     }
 
     public function create() {
+        try {
+            $this->authorize('create', Sport::class);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits de création d\'un sport.');
+        }
         return view('sport.create', ['titre' => "Création d'un sport"]);
     }
 
     public function store(Request $request) {
+        try {
+            $this->authorize('create', Sport::class);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits de création d\'un sport.');
+        }
         $this->validate(
             $request,
             [
@@ -80,6 +94,15 @@ class SportController extends Controller
 
     public function show(Request $request, $id) {
         $sport = Sport::find($id);
+
+        try {
+            $this->authorize('view', $sport);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits pour voir ce sport.');
+        }
+
         $titre = $request->get('action', 'show') == 'show' ? "Détails d'un sport" : "Suppression d'un sport";
         return view('sport.show', ['titre' => $titre, 'sport' => $sport,
             'action' => $request->get('action', 'show')]);
@@ -87,6 +110,15 @@ class SportController extends Controller
 
     public function edit(string $id) {
         $sport = Sport::findOrFail($id);
+
+        try {
+            $this->authorize('update', $sport);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits pour modifier ce sport.');
+        }
+
         return view('sport.edit', ['titre' => "Modification d'un sport", 'sport' => $sport]);
     }
 
@@ -97,6 +129,14 @@ class SportController extends Controller
                 ->with('msg', 'Modification annulée');
         }
         $sport = Sport::find($id);
+
+        try {
+            $this->authorize('update', $sport);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits pour modifier ce sport.');
+        }
 
         $this->validate(
             $request,
@@ -132,6 +172,14 @@ class SportController extends Controller
     public function destroy(Request $request, string $id) {
         $sport = Sport::find($id);
         if ($request->delete == 'valide') {
+            try {
+                $this->authorize('delete', $sport);
+            } catch (AuthorizationException $e) {
+                return redirect()->route('sports.index')
+                    ->with('type', 'error')
+                    ->with('msg', 'Vous n\'avez pas les droits pour supprimer ce sport.');
+            }
+
             if (isset($sport->url_media) && $sport->url_media != "images/no-image.svg") {
                 Storage::delete($sport->url_media);
             }
@@ -148,6 +196,14 @@ class SportController extends Controller
 
     public function upload(Request $request, $id) {
         $sport = Sport::findOrFail($id);
+
+        try {
+            $this->authorize('update', $sport);
+        } catch (AuthorizationException $e) {
+            return redirect()->route('sports.index')
+                ->with('type', 'error')
+                ->with('msg', 'Vous n\'avez pas les droits pour modifier ce sport.');
+        }
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file = $request->file('image');

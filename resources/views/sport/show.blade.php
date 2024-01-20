@@ -8,6 +8,7 @@
         <div>Nombre d'épreuves : {{$sport->nb_epreuves}}</div>
         <div>Date de début : {{$sport->date_debut}}</div>
         <div>Date de fin : {{$sport->date_fin}}</div>
+        <div>Créé par : {{ \App\Models\User::find($sport->user_id)->name }}</div>
         <div><img class="image" src="{{Storage::url($sport->url_media)}}" alt="image sport"></div>
         <div>
             @if($action == 'delete')

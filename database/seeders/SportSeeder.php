@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Sport;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 
 class SportSeeder extends Seeder
 {
